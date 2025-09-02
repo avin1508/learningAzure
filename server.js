@@ -1,6 +1,7 @@
 const express = require("express");
 const path = require("path");
-require("dotenv").config(); // Load .env variables
+// Remove dotenv for Azure
+// require("dotenv").config(); 
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -11,7 +12,8 @@ app.use(express.static(path.join(__dirname, "public")));
 // API route for button click
 app.get("/api/greet", (req, res) => {
     console.log("Greet API called");
-  res.json({ message: process.env.GREETING_MESSAGE });
+    const message = process.env.GREETING_MESSAGE || "🚀 Default Greeting!";
+    res.json({ message });
 });
 
 app.listen(PORT, () => {
