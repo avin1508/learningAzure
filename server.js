@@ -1,5 +1,6 @@
 const express = require("express");
 const path = require("path");
+require("dotenv").config(); // Load .env variables
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -9,7 +10,8 @@ app.use(express.static(path.join(__dirname, "public")));
 
 // API route for button click
 app.get("/api/greet", (req, res) => {
-  res.json({ message: "🚀 Hello Avinash! Your button works perfectly on Azure!" });
+    console.log("Greet API called");
+  res.json({ message: process.env.GREETING_MESSAGE });
 });
 
 app.listen(PORT, () => {
